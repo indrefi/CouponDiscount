@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+option csharp_namespace = "CouponService";
+
+package discountCupons;
+
+// The discount coupon service definition.
+service GenerateDiscountCouponService {
+  // Generates coupons.
+  rpc Generate (GenerateRequest) returns (GenerateResponse);
+}
+
+service UseDiscountCouponService {
+  // Use coupon codes.
+  rpc UseCoupon (UseCodeRequest) returns (UseCodeResponse);
+}
+
+service GetUnusedCouponService {
+  // Get unused coupons.
+  rpc GetCoupons (GetUnusedCouponsRequest) returns (GetUnusedCouponsResponse);
+}
+
+service GetTokenService {
+  // Get token service.
+  rpc GetToken (GetTokenRequest) returns (GetTokenResponse);
+}
+
+// The request message containing count and length of the coupons.
+message GenerateRequest {
+  uint32 Count = 1;
+  int32 Length = 2;
+}
+
+// The response message containing the generate result, success or failure.
+message GenerateResponse{
+  bool Result = 1;
+}
+
+// The request message containing code to be used.
+message UseCodeRequest {
+  string Code = 1;
+}
+
+// The response message containing the use code result, success or failure.
+message UseCodeResponse {
+  uint32 Result = 1;
+}
+
+// The request message containing number of unused coupons requested.
+message GetUnusedCouponsRequest {
+  uint32 CouponsNumber = 1;
+}
+
+// The response message containing the unused coupons
+message GetUnusedCouponsResponse {
+  repeated string Coupons = 1;
+}
+
+// The request message to get a token.
+message GetTokenRequest {
+  string UserName = 1;
+  string UserPassword =2;
+}
+
+// The response token.
+message GetTokenResponse {
+  string Token = 1;
+}
